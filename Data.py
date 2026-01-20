@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 def dataCleaning():
     df = pd.read_csv(r"C:\Users\Tena\Documents\Python proj\Data Cleaning\Customer Call List.csv")
@@ -20,7 +22,7 @@ def dataCleaning():
 
     df["Phone_Number"] = df["Phone_Number"].str.replace("Na--", "")
 
-    df[["Street_Address", "State", "Zip_Code"]] = df["Address"].str.split(',',2, expand=True) 
+    df[["Street_Address", "State", "Zip_Code"]] = df["Address"].str.split(",", expand=True) 
 
     df["Paying Customer"] = df["Paying Customer"].str.replace("Yes", "Y")
 
@@ -46,7 +48,13 @@ def dataCleaning():
 
     df = df.reset_index(drop=True)
 
+    sns.scatterplot(data=df, x="Paying Customer", y="Do_Not_Contact", hue=None)
     
+    plt.title("Scatter Plot from CSV Data")
+    plt.xlabel("X Axis Label")
+    plt.ylabel("Y Axis Label")
+    plt.tight_layout()
+    plt.show()
 
 dataCleaning()
 
